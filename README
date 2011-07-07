@@ -1,0 +1,16 @@
+This a some helper scripts to manually get started with the reddwarf project.
+
+Getting started:
+1. Follow the README here: https://github.com/cp16net/reddwarf/tree/reddwarf%2Fmaster/integration
+2. Copy or link these file to the directory: reddwarf / integration / vagrant / host
+3. Start up nova: ./nova-start.sh
+4. Source the platform.sh file: . platform.sh
+5. Use the function as they are described in the file. 
+
+Example: 
+$ dbaas_login
+ % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                Dload  Upload   Total   Spent    Left  Speed
+ 0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+TOKEN = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx2
+$ 
