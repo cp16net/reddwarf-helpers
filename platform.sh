@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function dbaas_login {
     output=$(curl -i -H "X-Auth-User: admin" -H "X-Auth-Key: admin" http://localhost:8775/v1.0/ | sed -n '/Token/p')
     token=`echo $output | awk -F": " '{print $2}'`
@@ -7,6 +9,11 @@ function dbaas_login {
 
 function list_images {
     curl -H "X-Auth-Token: $TOKEN" http://localhost:8775/v1.0/images/detail
+    echo ""
+}
+
+function list_images_xml {
+    curl -H "X-Auth-Token: $TOKEN" -H "Accept: application/xml" http://localhost:8775/v1.0/images/detail
     echo ""
 }
 
@@ -65,14 +72,20 @@ function show_container {
     echo ""
 }
 
-function create_container {
+function create_container_fail {
     JSON_DATA='{"dbcontainer"'':{"name":"'$1'","flavorRef":"http://localhost:8775/v1.0/flavors/'$2'","imageRef":"http://localhost:8775/v1.0/images/'$3'", "port":"3306", "dbtype":{"name": "mysql", "version":"5.1.2"}, "databases":[{"name":"testdb", "character_set":"utf8", "collate":"utf8_general_ci"}, {"name":"abfadklfgklq3u4q78tzdfjhvgajkdshfgjaef72346JKVFE4"}]}}'
     curl -H "X-Auth-Token: $TOKEN" -H"Content-Type: application/json" -d"$JSON_DATA" http://localhost:8775/v1.0/dbcontainers
     echo ""
 }
 
+function create_container {
+    JSON_DATA='{"dbcontainer"'':{"name":"'$1'","flavorRef":"http://localhost:8775/v1.0/flavors/'$2'","imageRef":"http://localhost:8775/v1.0/images/'$3'", "port":"3306", "dbtype":{"name": "mysql", "version":"5.1.2"}, "databases":[{"name":"testdb", "character_set":"utf8", "collate":"utf8_general_ci"}, {"name":"abfadklfgklq3u4q78tzdfjhvgajkdshfgjaef72346JKVFE4"}],"volume":{"size":"2"}}}'
+    curl -H "X-Auth-Token: $TOKEN" -H"Content-Type: application/json" -d"$JSON_DATA" http://localhost:8775/v1.0/dbcontainers
+    echo ""
+}
+
 function create_container_xml {
-    JSON_DATA='{"dbcontainer"'':{"name":"'$1'","flavorRef":"http://localhost:8775/v1.0/flavors/'$2'","imageRef":"http://localhost:8775/v1.0/images/'$3'", "port":"3306", "dbtype":{"name": "mysql", "version":"5.1.2"}, "databases":[{"name":"testdb", "character_set":"utf8", "collate":"utf8_general_ci"}, {"name":"abfadklfgklq3u4q78tzdfjhvgajkdshfgjaef72346JKVFE4"}]}}'
+    JSON_DATA='{"dbcontainer"'':{"name":"'$1'","flavorRef":"http://localhost:8775/v1.0/flavors/'$2'","imageRef":"http://localhost:8775/v1.0/images/'$3'", "port":"3306", "dbtype":{"name": "mysql", "version":"5.1.2"}, "databases":[{"name":"testdb", "character_set":"utf8", "collate":"utf8_general_ci"}, {"name":"abfadklfgklq3u4q78tzdfjhvgajkdshfgjaef72346JKVFE4"}],"volume":{"size":"2"}}}'
     curl -H "X-Auth-Token: $TOKEN" -H "Accept: application/xml" -H"Content-Type: application/json" -d"$JSON_DATA" http://localhost:8775/v1.0/dbcontainers
     echo ""
 }
