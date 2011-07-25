@@ -15,8 +15,8 @@ CONFFILE="--flagfile=/vagrant/nova-vag.conf"
 screen -d -m -S nova -t nova
 sleep 1
 
-screen_it glance-reg "sudo $GLANCE_HOME/bin/glance-registry /vagrant/glance.conf --debug"
-screen_it glance-api "sudo $GLANCE_HOME/bin/glance-api /vagrant/glance.conf --debug"
+screen_it glance-reg "sudo $GLANCE_HOME/bin/glance-registry /vagrant/glance-reg.conf --debug"
+screen_it glance-api "sudo $GLANCE_HOME/bin/glance-api /vagrant/glance-api.conf --debug"
 
 screen_it platform "sudo $NOVA_HOME/bin/reddwarf-api $CONFFILE"
 screen_it api "sudo $NOVA_HOME/bin/nova-api $CONFFILE"
