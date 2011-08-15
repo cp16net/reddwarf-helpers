@@ -10,7 +10,7 @@ function screen_it {
     screen -S nova -p $1 -X stuff "$2$NL"
 }
 
-CONFFILE="--flagfile=/vagrant/nova-vag.conf"
+CONFFILE="--flagfile=~/nova.conf"
 
 screen -d -m -S nova -t nova
 sleep 1
